@@ -1,17 +1,13 @@
-package nekogochan.nekofield.base;
+package nekogochan.nekofield.field;
 
 import nekogochan.nekofield.Field;
 
-public class BaseField<T> implements Field<T> {
+public class Ref<T> implements Field<T> {
 
   T value;
 
-  public BaseField(T value) {
+  public Ref(T value) {
     this.value = value;
-  }
-
-  public BaseField() {
-    this(null);
   }
 
   @Override

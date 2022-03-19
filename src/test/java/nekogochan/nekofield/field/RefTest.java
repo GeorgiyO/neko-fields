@@ -1,27 +1,26 @@
-package nekogochan.nekofield.base;
+package nekogochan.nekofield.field;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BaseFieldTest {
+class RefTest {
 
   @Test
   void constructor() {
-    new BaseField<>(0);
-    new BaseField<>();
+    new Ref<>(0);
   }
 
   @Test
   void set() {
-    var field = new BaseField<>(0);
+    var field = new Ref<>(0);
     field.set(10);
     assertEquals(10, field.get());
   }
 
   @Test
   void get() {
-    var field = new BaseField<>(0);
+    var field = new Ref<>(0);
     assertDoesNotThrow(field::get);
   }
 }
