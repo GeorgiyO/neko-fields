@@ -1,6 +1,4 @@
-package nekogochan.nekofield.field;
-
-import nekogochan.nekofield.Field;
+package nekogochan.nekofield.base;
 
 public class Ref<T> implements Field<T> {
 
@@ -8,6 +6,10 @@ public class Ref<T> implements Field<T> {
 
   public Ref(T value) {
     this.value = value;
+  }
+
+  public Ref() {
+    this(null);
   }
 
   @Override

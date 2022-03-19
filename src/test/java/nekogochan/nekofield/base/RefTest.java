@@ -1,5 +1,6 @@
-package nekogochan.nekofield.field;
+package nekogochan.nekofield.base;
 
+import nekogochan.nekofield.base.Ref;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
