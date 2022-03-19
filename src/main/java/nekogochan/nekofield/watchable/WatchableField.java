@@ -1,6 +1,6 @@
 package nekogochan.nekofield.watchable;
 
-import nekogochan.nekofield.base.Field;
+import nekogochan.nekofield.Field;
 
 import java.util.ArrayList;
 import java.util.List;

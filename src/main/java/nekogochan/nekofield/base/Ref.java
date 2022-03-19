@@ -1,5 +1,7 @@
 package nekogochan.nekofield.base;
 
+import nekogochan.nekofield.Field;
+
 public class Ref<T> implements Field<T> {
 
   T value;

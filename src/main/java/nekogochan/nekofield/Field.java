@@ -1,4 +1,6 @@
-package nekogochan.nekofield.base;
+package nekogochan.nekofield;
+
+import nekogochan.nekofield.ReadOnly;
 
 import java.util.function.Consumer;
 

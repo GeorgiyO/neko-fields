@@ -1,4 +1,4 @@
-package nekogochan.nekofield.base;
+package nekogochan.nekofield;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
