@@ -7,6 +7,18 @@
   <groupId>nekogochan</groupId>
   <artifactId>neko-fields</artifactId>
   <version>0.0.1</version>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>11</source>
+          <target>11</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
   <dependencies>
     <dependency>
@@ -14,12 +26,22 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>5.8.2</version>
     </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy</artifactId>
+      <version>3.0.10</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>nekogochan</groupId>
+      <artifactId>functional</artifactId>
+      <version>0.1.0</version>
+    </dependency>
   </dependencies>
 
-
   <properties>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
   </properties>
 
 </project>

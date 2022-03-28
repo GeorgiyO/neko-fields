@@ -1,18 +1,17 @@
-package nekogochan.nekofield.watchable;
+package nekogochan.field.watchable;
 
-import nekogochan.nekofield.Field;
+import nekogochan.field.Field;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 public class WatchableField<T> implements Field<T>, Watchable<T> {
 
   public static int RUN_WATCHERS_ON_CONSTRUCT = 0b1;
 
-  T value;
-  List<BiConsumer<T, T>> watchers;
+  protected T value;
+  protected List<BiConsumer<T, T>> watchers;
 
   public WatchableField(T value, List<BiConsumer<T, T>> watchers, int setup) {
     this.watchers = watchers;
@@ -31,7 +30,7 @@ public class WatchableField<T> implements Field<T>, Watchable<T> {
   }
 
   private void runWatchers(T newValue) {
-    watchers.forEach(watchers -> watchers.accept(newValue, this.value));
+    watchers.forEach(it -> it.accept(newValue, this.value));
   }
 
   @Override
@@ -43,13 +42,6 @@ public class WatchableField<T> implements Field<T>, Watchable<T> {
   @Override
   public T get() {
     return value;
-  }
-
-  @Override
-  public Watcher onSet(Consumer<T> op) {
-    BiConsumer<T, T> watcher = (newValue, oldValue) -> op.accept(newValue);
-    watchers.add(watcher);
-    return () -> watchers.remove(watcher);
   }
 
   @Override

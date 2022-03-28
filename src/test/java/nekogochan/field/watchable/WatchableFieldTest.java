@@ -1,24 +1,26 @@
-package nekogochan.nekofield.watchable;
+package nekogochan.field.watchable;
 
-import nekogochan.nekofield.base.Ref;
+import nekogochan.functional.ref.IntRef;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WatchableFieldTest {
 
   @Test
   void onSet() {
     var field = new WatchableField<>(10);
-    var ref = new Ref<>(0);
+    var ref = new IntRef(0);
     var watcher = field.onSet(ref::set);
 
     field.set(20);
+
     assertEquals(20, field.get());
     assertEquals(20, ref.get());
 
     watcher.unwatch();
     field.set(30);
+
     assertEquals(30, field.get());
     assertEquals(20, ref.get());
   }
@@ -26,8 +28,8 @@ class WatchableFieldTest {
   @Test
   void onSet_2() {
     var field = new WatchableField<>(1);
-    var newValueRef = new Ref<>(0);
-    var oldValueRef = new Ref<>(0);
+    var newValueRef = new IntRef(0);
+    var oldValueRef = new IntRef(0);
     var watcher = field.onSet((_new, _old) -> {
       newValueRef.set(_new);
       oldValueRef.set(_old);

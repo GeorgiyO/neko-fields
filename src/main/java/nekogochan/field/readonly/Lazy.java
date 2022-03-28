@@ -1,4 +1,4 @@
-package nekogochan.nekofield.readonly;
+package nekogochan.field.readonly;
 
 import java.util.function.Supplier;
 
