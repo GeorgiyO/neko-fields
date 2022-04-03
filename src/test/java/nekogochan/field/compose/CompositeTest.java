@@ -1,6 +1,6 @@
 package nekogochan.field.compose;
 
-import nekogochan.field.watchable.WatchableField;
+import nekogochan.field.watchable.Atom;
 import nekogochan.functional.ref.IntRef;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,7 @@ class CompositeTest {
 
   @Test
   void oneCommonFieldDependencyTest() {
-    var dependency = new WatchableField<>("string");
+    var dependency = new Atom<>("string");
     var composite = new Composite<>(dependency, String::length);
     var changes = new IntRef(0);
     composite.onSet(changes::increment);
@@ -30,7 +30,7 @@ class CompositeTest {
 
   @Test
   void twoLevelCompositeTest() {
-    var dependency = new WatchableField<>("Kitty");
+    var dependency = new Atom<>("Kitty");
     var firstComposite = new Composite<>(dependency, String::length);
     var secondComposite = new Composite<>(firstComposite, i -> i + 10);
     var changes = new IntRef(0);
@@ -51,8 +51,8 @@ class CompositeTest {
 
   @Test
   void twoDependenciesCompositeTest() {
-    var firstName = new WatchableField<>("Ivan");
-    var secondName = new WatchableField<>("Ivanov");
+    var firstName = new Atom<>("Ivan");
+    var secondName = new Atom<>("Ivanov");
     var fullName = new Composite<>(firstName, secondName, (_1, _2) -> _1 + " " + _2);
     var changes = new IntRef(0);
     fullName.onSet(changes::increment);

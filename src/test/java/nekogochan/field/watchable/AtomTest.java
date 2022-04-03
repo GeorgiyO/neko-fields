@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class WatchableFieldTest {
+class AtomTest {
 
   @Test
   void onSet() {
-    var field = new WatchableField<>(10);
+    var field = new Atom<>(10);
     var ref = new IntRef(0);
     var watcher = field.onSet(ref::set);
 
@@ -27,7 +27,7 @@ class WatchableFieldTest {
 
   @Test
   void onSet_2() {
-    var field = new WatchableField<>(1);
+    var field = new Atom<>(1);
     var newValueRef = new IntRef(0);
     var oldValueRef = new IntRef(0);
     var watcher = field.onSet((_new, _old) -> {

@@ -1,31 +1,28 @@
 package nekogochan.field.reactive;
 
-import nekogochan.field.watchable.WatchableField;
+import nekogochan.field.watchable.Atom;
 import nekogochan.field.watchable.Watcher;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Arrays.asList;
-
 @SuppressWarnings({"rawtypes"})
 public abstract class AbstractReactiveComponent implements ReactiveComponent {
 
-  List<WatchableField> fields = new ArrayList<>();
+  List<Atom> fields = new ArrayList<>();
   List<Watcher> externalFieldsListeners = new ArrayList<>();
-  boolean firstCall = true;
   boolean needUpdate = false;
   boolean inAct = false;
 
   @Override
-  public <T> WatchableField<T> use(T initValue) {
-    var field = new WatchableField<>(initValue);
+  public <T> Atom<T> use(T initValue) {
+    var field = new Atom<>(initValue);
     initField(field);
     return field;
   }
 
   @Override
-  public <T> WatchableField<T> use(WatchableField<T> field) {
+  public <T> Atom<T> use(Atom<T> field) {
     var watcher = initField(field);
     externalFieldsListeners.add(watcher);
     return field;
@@ -40,7 +37,7 @@ public abstract class AbstractReactiveComponent implements ReactiveComponent {
     afterAct();
   }
 
-  protected void clear() {
+  protected void free() {
     externalFieldsListeners.forEach(Watcher::unwatch);
   }
 
@@ -56,7 +53,7 @@ public abstract class AbstractReactiveComponent implements ReactiveComponent {
     inAct = false;
   }
 
-  private Watcher initField(WatchableField<?> field) {
+  private Watcher initField(Atom<?> field) {
     fields.add(field);
     return field.onSet(() -> {
       if (this.inAct) {

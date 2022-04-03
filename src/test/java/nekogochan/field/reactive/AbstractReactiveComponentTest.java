@@ -1,6 +1,6 @@
 package nekogochan.field.reactive;
 
-import nekogochan.field.watchable.WatchableField;
+import nekogochan.field.watchable.Atom;
 import nekogochan.functional.ref.IntRef;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ public class AbstractReactiveComponentTest {
   void simpleInternalStateTest() {
     var updates = new IntRef(0);
     var component = new AbstractReactiveComponent() {
-      final WatchableField<Integer> state = use(0);
+      final Atom<Integer> state = use(0);
 
       @Override
       protected void abstractAct() {
@@ -33,9 +33,9 @@ public class AbstractReactiveComponentTest {
   @Test
   void simpleExternalStateTest() {
     var updates = new IntRef(0);
-    var state = new WatchableField<>(0);
+    var state = new Atom<>(0);
     var component = new AbstractReactiveComponent() {
-      final WatchableField<Integer> __state = use(state);
+      final Atom<Integer> __state = use(state);
 
       @Override
       protected void abstractAct() {
@@ -58,7 +58,7 @@ public class AbstractReactiveComponentTest {
     var updates = new IntRef(0);
     var limit = 5;
     var component = new AbstractReactiveComponent() {
-      final WatchableField<Integer> state_1 = use(0), state_2 = use(0);
+      final Atom<Integer> state_1 = use(0), state_2 = use(0);
       int i = 0;
 
       @Override

@@ -1,10 +1,10 @@
 package nekogochan.field.reactive;
 
-import nekogochan.field.watchable.WatchableField;
+import nekogochan.field.watchable.Atom;
 
 public interface ReactiveComponent {
-  <T> WatchableField<T> use(T initValue);
-  <T> WatchableField<T> use(WatchableField<T> field);
+  <T> Atom<T> use(T initValue);
+  <T> Atom<T> use(Atom<T> field);
 
   void act();
 }

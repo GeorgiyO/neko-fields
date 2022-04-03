@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public class WatchableField<T> implements Field<T>, Watchable<T> {
+public class Atom<T> implements Field<T>, Watchable<T> {
 
   public static int RUN_WATCHERS_ON_CONSTRUCT = 0b1;
 
   protected T value;
   protected List<BiConsumer<T, T>> watchers;
 
-  public WatchableField(T value, List<BiConsumer<T, T>> watchers, int setup) {
+  public Atom(T value, List<BiConsumer<T, T>> watchers, int setup) {
     this.watchers = watchers;
     if ((setup & RUN_WATCHERS_ON_CONSTRUCT) == 1) {
       runWatchers(value);
@@ -21,11 +21,11 @@ public class WatchableField<T> implements Field<T>, Watchable<T> {
     this.value = value;
   }
 
-  public WatchableField(T value, List<BiConsumer<T, T>> watchers) {
+  public Atom(T value, List<BiConsumer<T, T>> watchers) {
     this(value, watchers, 0);
   }
 
-  public WatchableField(T value) {
+  public Atom(T value) {
     this(value, new ArrayList<>());
   }
 
