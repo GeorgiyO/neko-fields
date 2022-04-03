@@ -56,14 +56,13 @@ public class AbstractReactiveComponentTest {
   @Test
   void component_thatUsesMultipleState_shouldUpdateOneTime_ifUpdateBothInAct() {
     var updates = new IntRef(0);
-    var limit = 5;
     var component = new AbstractReactiveComponent() {
       final Atom<Integer> state_1 = use(0), state_2 = use(0);
       int i = 0;
 
       @Override
       protected void abstractAct() {
-        if (i < limit) {
+        if (i < 5) {
           state_1.set(0);
           state_2.set(0);
           i++;

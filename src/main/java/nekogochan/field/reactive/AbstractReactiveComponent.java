@@ -9,10 +9,9 @@ import java.util.List;
 @SuppressWarnings({"rawtypes"})
 public abstract class AbstractReactiveComponent implements ReactiveComponent {
 
-  List<Atom> fields = new ArrayList<>();
-  List<Watcher> externalFieldsListeners = new ArrayList<>();
-  boolean needUpdate = false;
-  boolean inAct = false;
+  private final List<Watcher> externalFieldsListeners = new ArrayList<>();
+  private boolean needUpdate = false;
+  private boolean inAct = false;
 
   @Override
   public <T> Atom<T> use(T initValue) {
@@ -30,14 +29,13 @@ public abstract class AbstractReactiveComponent implements ReactiveComponent {
 
   protected abstract void abstractAct();
 
-  @Override
   public void act() {
     beforeAct();
     abstractAct();
     afterAct();
   }
 
-  protected void free() {
+  public void free() {
     externalFieldsListeners.forEach(Watcher::unwatch);
   }
 
@@ -54,7 +52,6 @@ public abstract class AbstractReactiveComponent implements ReactiveComponent {
   }
 
   private Watcher initField(Atom<?> field) {
-    fields.add(field);
     return field.onSet(() -> {
       if (this.inAct) {
         needUpdate = true;
